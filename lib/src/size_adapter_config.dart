@@ -118,10 +118,20 @@ double radius(double inputRadius) {
 /// screenWidth is the width of the screen the app is run on
 /// desginWidth is the design screen width
 
-double padding(double inputPadding) {
+double paddingHorizontal(double inputPadding) {
   double screenWidth = SizeAdapterConfig.screenWidth;
   double desginWidth = SizeAdapterConfig.designWidth;
   return (inputPadding / desginWidth) * screenWidth;
+}
+// Calculate padding proportionate to screen height
+/// --
+/// screenHeight is the height of the screen the app is run on
+/// desginHeight is the design screen height
+
+double paddingvertical(double inputPadding) {
+  double screenHeight = SizeAdapterConfig.screenHeight;
+  double designHeight = SizeAdapterConfig.designHeight;
+  return (inputPadding / designHeight) * screenHeight;
 }
 
 /// A method that returns the adaptive text size according to different screen sizes

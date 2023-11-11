@@ -18,8 +18,13 @@ extension SizeConfigExt on num {
 
   /// Calculate padding proportionate to screen width
   ///
-  /// Eg: 20.p -> will take 20% padding of the screen
-  double get p => padding(toDouble());
+  /// Eg: 20.ph -> will take 20% padding of the screen
+  double get ph => paddingHorizontal(toDouble());
+
+  /// Calculate padding proportionate to screen height
+  ///
+  /// Eg: 20.pv -> will take 20% padding of the screen
+  double get pv => paddingvertical(toDouble());
 
   /// Calculates the sp (Scalable Pixel) depending on the device's screen size
   ///

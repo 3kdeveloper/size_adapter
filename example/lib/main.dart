@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizeAdapter(
       designSize: const Size(375.0, 812.0),
-      designStatusBarHeight: 44.0,
-      designBottomBarHeight: 28.0,
+      designStatusBarHeight: 34.0,
+      homeBarHeight: 28.0,
       child: MaterialApp(
         title: 'Size Adapter',
         debugShowCheckedModeBanner: false,
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
       appBar: const AppBarWidget(),
       drawer: const Drawer(),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.p, vertical: 20.p),
+        padding: EdgeInsets.symmetric(horizontal: 20.ph, vertical: 20.pv),
         child: Column(
           children: [
             Container(
@@ -153,7 +153,7 @@ class HomeScreen extends StatelessWidget {
         width: 375.w,
         height: 51.h,
         color: Theme.of(context).primaryColor,
-        padding: EdgeInsets.symmetric(horizontal: 20.p),
+        padding: EdgeInsets.symmetric(horizontal: 20.ph),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,6 +169,27 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+// class HomeScreen extends StatelessWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: const AppBarWidget(),
+//       body: Container(
+//         width: 375.w,
+//         height: 643.h,
+//         color: const Color(0xFFD27e7e),
+//       ),
+//       bottomNavigationBar: Container(
+//         width: 375.w,
+//         height: 51.h,
+//         color: Colors.grey,
+//       ),
+//     );
+//   }
+// }
+
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key});
 
@@ -181,15 +202,15 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20.sp)),
       actions: [
         Padding(
-          padding: EdgeInsets.only(right: 20.p),
+          padding: EdgeInsets.only(right: 20.ph),
           child: Icon(Icons.notifications, size: 24.h),
         ),
         Padding(
-          padding: EdgeInsets.only(right: 20.p),
+          padding: EdgeInsets.only(right: 20.ph),
           child: Icon(Icons.share, size: 24.h),
         ),
         Padding(
-          padding: EdgeInsets.only(right: 20.p),
+          padding: EdgeInsets.only(right: 20.ph),
           child: Icon(Icons.search, size: 24.h),
         ),
       ],
