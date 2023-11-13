@@ -1,6 +1,6 @@
 import 'package:size_adapter/size_adapter.dart';
 
-extension SizeConfigExt on num {
+extension SizeAdapterExt on num {
   /// Calculates the height depending on the device's screen size
   ///
   /// Eg: 20.h -> will take 20% of the screen's height

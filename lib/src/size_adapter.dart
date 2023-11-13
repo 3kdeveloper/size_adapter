@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:size_adapter/size_adapter.dart';
+import 'package:size_adapter/src/extensions/context_ext.dart';
 
 /// Wrap your route level widget with [SizeAdapter]
 ///
@@ -30,41 +29,20 @@ class SizeAdapter extends StatelessWidget {
   /// homeBarHeight is required
   final double homeBarHeight;
 
-  /// If you want to provide the text scale factor you can
-  ///
-  /// Eg: [textScaleFactor: 1] by default it is set to 1
-  final double? textScaleFactor;
-
-  /// A boolean variable to control the inclusion of top padding in safe area calculations.
-  ///
-  /// If `true`, the top padding will be considered in safe area calculations, ensuring that
-  /// the design layout accommodates the status bar or other top elements. If `false`, the top
-  /// padding will be excluded from the safe area calculations.
-  ///
-  /// Example:
-  /// ```dart
-  /// bool paddingTop = true;
-  /// ```
-  final bool? paddingTop;
-
-  /// A boolean variable to control the inclusion of bottom padding in safe area calculations.
-  ///
-  /// If `true`, the bottom padding will be considered in safe area calculations, ensuring that
-  /// the design layout accommodates the navigation bar or other bottom elements. If `false`, the
-  /// bottom padding will be excluded from the safe area calculations.
-  ///
-  /// Example:
-  /// ```dart
-  /// bool paddingBottom = false;
-  /// ```
-  final bool? paddingBottom;
-
   /// Here you provide the widget
   ///
   /// Eg: [MaterialApp();]
   /// child is required
   final Widget child;
 
+  /// If you want to provide the text scale factor you can
+  ///
+  /// Eg: [textScaleFactor: 1] by default it is set to 1
+  final double? textScaleFactor;
+
+  /// Constructor
+  ///
+  /// --
   const SizeAdapter({
     super.key,
     required this.designSize,
@@ -72,24 +50,39 @@ class SizeAdapter extends StatelessWidget {
     required this.homeBarHeight,
     required this.child,
     this.textScaleFactor,
-    this.paddingTop,
-    this.paddingBottom,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: paddingTop ?? false,
-      bottom: paddingBottom ?? true,
+    return Padding(
+      padding: EdgeInsets.only(bottom: context.paddingBottom),
       child: LayoutBuilder(builder: (context, constraints) {
         Size safeDesignSize = Size(designSize.width,
             (designSize.height - (designStatusBarHeight + homeBarHeight)));
-        //TODO Remove this if not needed
-        log(safeDesignSize.width.toString());
-        log(safeDesignSize.height.toString());
-        log(MediaQuery.of(context).padding.bottom.toString());
 
-        /// Initialize [Size Adapter]
+        /// Initializes the SizeAdapterConfig for responsive design.
+        ///
+        /// The `init` method sets up the SizeAdapterConfig, enabling the application
+        /// to create layouts that adapt to different screen sizes and resolutions.
+        ///
+        /// ### Parameters:
+        /// - `context` (required): The BuildContext to access theme and media information.
+        /// - `designSize` (required): The original design size of the screen, typically
+        ///    representing the dimensions to which the application was originally designed.
+        ///
+        /// ### Usage:
+        /// ```dart
+        /// SizeAdapterConfig.init(context: context, designSize: safeDesignSize);
+        /// ```
+        ///
+        /// This initialization is crucial for achieving responsive layouts. It allows
+        /// the application to dynamically adjust widget sizes based on the relationship
+        /// between the original design and the actual device screen.
+        ///
+        /// **Note:** Initializing SizeAdapterConfig is typically done early in the widget
+        /// tree, ensuring that the layout maintains its intended proportions across
+        /// different devices and screen sizes.
+
         SizeAdapterConfig.init(context: context, designSize: safeDesignSize);
         return MediaQuery(
           data: MediaQuery.of(context)
