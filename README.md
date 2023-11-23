@@ -3,12 +3,20 @@
 Say goodbye to responsive design headaches in Flutter!
 Introducing Size Adapter – the solution that effortlessly adapts your UI components to different screen sizes.
 
+## Important Note
+
+When testing your Flutter application using Chrome or any method
+that emulates a mobile device, ensure to perform a hot reload after switching to the mobile device mode. This is essential for the size_adapter
+to accurately adapt to the new device dimensions and provide the intended
+user experience.
+
 ## Platforms
 
 | Platforms | Supported | 
 |-----------|-----------|
 | Android   | ✅        |  
-| iOS       | ✅        |
+| IOS       | ✅        |
+| Tablet    | ✅        |
 | Web       | ❌        |
 | Desktop   | ❌        |
 
@@ -46,8 +54,7 @@ To use this library in your code:
 This Flutter package simplifies responsive design, making your UI look stunning on any mobile device. 
 Check out the demos below.
 
-<img src="provide png" alt="Demo Screen"
-width="250" height="500">
+<img src="provide png" alt="Demo Screen" width="250" height="500">
 
 ## How to use
 
@@ -58,9 +65,13 @@ SizeAdapter(
   ///-- 
   /// 812.0 is the design height
   designSize: const Size(375.0, 812.0),
-  /// 44.0 is the design status bar height
+  /// 44.0 is the design status bar height 
+  ///--
+  /// default [0.0]
   designStatusBarHeight: 44.0,
   /// 28.0 is the design bottom bar height
+  ///--
+  /// default [0.0]
   designBottomBarHeight: 28.0,
   child: MaterialApp(
   title: 'My App',

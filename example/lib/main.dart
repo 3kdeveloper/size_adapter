@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return SizeAdapter(
       designSize: const Size(375.0, 812.0),
       designStatusBarHeight: 34.0,
-      homeBarHeight: 28.0,
+      designHomeBarHeight: 28.0,
       child: MaterialApp(
         title: 'Size Adapter',
         debugShowCheckedModeBanner: false,
@@ -28,167 +28,149 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppBarWidget(),
-      drawer: const Drawer(),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.ph, vertical: 20.pv),
-        child: Column(
-          children: [
-            Container(
-              width: 335.w,
-              height: 62.h,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: const Color(0xFFE0E0E0),
-                borderRadius: BorderRadius.circular(8.r),
+    return OrientationBuilder(builder: (context, orientation) {
+      return Scaffold(
+        appBar: const AppBarWidget(),
+        drawer: const Drawer(),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.ph, vertical: 20.pv),
+          child: Column(
+            children: [
+              Container(
+                width: 335.w,
+                height: 62.h,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE0E0E0),
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Text(
+                  'This is heading',
+                  style:
+                      TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w600),
+                ),
               ),
-              child: Text(
-                'This is heading',
-                style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w600),
+              SizedBox(height: 20.h),
+              Row(
+                children: [
+                  Container(
+                    width: 160.w,
+                    height: 160.h,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE0E0E0),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Text(
+                      'Simple',
+                      style: TextStyle(
+                          fontSize: 40.sp, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  SizedBox(width: 15.w),
+                  Container(
+                    width: 160.w,
+                    height: 160.h,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE0E0E0),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Text(
+                      'This\nis\nsimple\ntext',
+                      style: TextStyle(fontSize: 18.sp),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(height: 20.h),
-            Row(
-              children: [
-                Container(
-                  width: 160.w,
-                  height: 160.h,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE0E0E0),
-                    borderRadius: BorderRadius.circular(10.r),
+              SizedBox(height: 20.h),
+              Row(
+                children: [
+                  Container(
+                    width: 160.w,
+                    height: 160.h,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE0E0E0),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Text(
+                      'This is\nsimple\ntext',
+                      style: TextStyle(
+                          fontSize: 24.sp, fontWeight: FontWeight.w700),
+                    ),
                   ),
-                  child: Text(
-                    'Simple',
-                    style:
-                        TextStyle(fontSize: 40.sp, fontWeight: FontWeight.w700),
+                  SizedBox(width: 15.w),
+                  Container(
+                    width: 160.w,
+                    height: 160.h,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE0E0E0),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Text(
+                      'simple\ntext',
+                      style: TextStyle(fontSize: 32.sp),
+                    ),
                   ),
-                ),
-                SizedBox(width: 15.w),
-                Container(
-                  width: 160.w,
-                  height: 160.h,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE0E0E0),
-                    borderRadius: BorderRadius.circular(10.r),
+                ],
+              ),
+              SizedBox(height: 20.h),
+              Row(
+                children: [
+                  Container(
+                    width: 160.w,
+                    height: 160.h,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE0E0E0),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Text(
+                      'This is simple text',
+                      style: TextStyle(fontSize: 10.sp),
+                    ),
                   ),
-                  child: Text(
-                    'This\nis\nsimple\ntext',
-                    style: TextStyle(fontSize: 18.sp),
+                  SizedBox(width: 15.w),
+                  Container(
+                    width: 160.w,
+                    height: 160.h,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE0E0E0),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Text(
+                      'This is simple text',
+                      style: TextStyle(fontSize: 14.sp),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20.h),
-            Row(
-              children: [
-                Container(
-                  width: 160.w,
-                  height: 160.h,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE0E0E0),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: Text(
-                    'This is\nsimple\ntext',
-                    style:
-                        TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w700),
-                  ),
-                ),
-                SizedBox(width: 15.w),
-                Container(
-                  width: 160.w,
-                  height: 160.h,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE0E0E0),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: Text(
-                    'simple\ntext',
-                    style: TextStyle(fontSize: 32.sp),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20.h),
-            Row(
-              children: [
-                Container(
-                  width: 160.w,
-                  height: 160.h,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE0E0E0),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: Text(
-                    'This is simple text',
-                    style: TextStyle(fontSize: 10.sp),
-                  ),
-                ),
-                SizedBox(width: 15.w),
-                Container(
-                  width: 160.w,
-                  height: 160.h,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE0E0E0),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: Text(
-                    'This is simple text',
-                    style: TextStyle(fontSize: 14.sp),
-                  ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: Container(
-        width: 375.w,
-        height: 51.h,
-        color: Theme.of(context).primaryColor,
-        padding: EdgeInsets.symmetric(horizontal: 20.ph),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(Icons.home, color: Colors.white, size: 28.h),
-            Icon(Icons.search, color: Colors.white, size: 28.h),
-            Icon(Icons.bookmark, color: Colors.white, size: 28.h),
-            Icon(Icons.person, color: Colors.white, size: 28.h),
-          ],
+        bottomNavigationBar: Container(
+          width: 375.w,
+          height: 51.h,
+          color: Theme.of(context).primaryColor,
+          padding: EdgeInsets.symmetric(horizontal: 20.ph),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(Icons.home, color: Colors.white, size: 28.h),
+              Icon(Icons.search, color: Colors.white, size: 28.h),
+              Icon(Icons.bookmark, color: Colors.white, size: 28.h),
+              Icon(Icons.person, color: Colors.white, size: 28.h),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
-
-// class HomeScreen extends StatelessWidget {
-//   const HomeScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: const AppBarWidget(),
-//       body: Container(
-//         width: 375.w,
-//         height: 643.h,
-//         color: const Color(0xFFD27e7e),
-//       ),
-//       bottomNavigationBar: Container(
-//         width: 375.w,
-//         height: 51.h,
-//         color: Colors.grey,
-//       ),
-//     );
-//   }
-// }
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key});

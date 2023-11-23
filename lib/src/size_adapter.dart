@@ -21,13 +21,13 @@ class SizeAdapter extends StatelessWidget {
   ///
   /// Eg: 44.0
   /// designStatusBarHeight is required
-  final double designStatusBarHeight;
+  final double? designStatusBarHeight;
 
   /// Provide your design status bar size here
   ///
   /// Eg: 28.0
   /// homeBarHeight is required
-  final double homeBarHeight;
+  final double? designHomeBarHeight;
 
   /// Here you provide the widget
   ///
@@ -46,9 +46,9 @@ class SizeAdapter extends StatelessWidget {
   const SizeAdapter({
     super.key,
     required this.designSize,
-    required this.designStatusBarHeight,
-    required this.homeBarHeight,
     required this.child,
+    this.designStatusBarHeight,
+    this.designHomeBarHeight,
     this.textScaleFactor,
   });
 
@@ -57,38 +57,43 @@ class SizeAdapter extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: context.paddingBottom),
       child: LayoutBuilder(builder: (context, constraints) {
-        Size safeDesignSize = Size(designSize.width,
-            (designSize.height - (designStatusBarHeight + homeBarHeight)));
+        return OrientationBuilder(builder: (context, orientation) {
+          Size safeDesignSize = Size(
+              designSize.width,
+              (designSize.height -
+                  ((designStatusBarHeight ?? 0.0) +
+                      (designHomeBarHeight ?? 0.0))));
 
-        /// Initializes the SizeAdapterConfig for responsive design.
-        ///
-        /// The `init` method sets up the SizeAdapterConfig, enabling the application
-        /// to create layouts that adapt to different screen sizes and resolutions.
-        ///
-        /// ### Parameters:
-        /// - `context` (required): The BuildContext to access theme and media information.
-        /// - `designSize` (required): The original design size of the screen, typically
-        ///    representing the dimensions to which the application was originally designed.
-        ///
-        /// ### Usage:
-        /// ```dart
-        /// SizeAdapterConfig.init(context: context, designSize: safeDesignSize);
-        /// ```
-        ///
-        /// This initialization is crucial for achieving responsive layouts. It allows
-        /// the application to dynamically adjust widget sizes based on the relationship
-        /// between the original design and the actual device screen.
-        ///
-        /// **Note:** Initializing SizeAdapterConfig is typically done early in the widget
-        /// tree, ensuring that the layout maintains its intended proportions across
-        /// different devices and screen sizes.
+          /// Initializes the SizeAdapterConfig for responsive design.
+          ///
+          /// The `init` method sets up the SizeAdapterConfig, enabling the application
+          /// to create layouts that adapt to different screen sizes and resolutions.
+          ///
+          /// ### Parameters:
+          /// - `context` (required): The BuildContext to access theme and media information.
+          /// - `designSize` (required): The original design size of the screen, typically
+          ///    representing the dimensions to which the application was originally designed.
+          ///
+          /// ### Usage:
+          /// ```dart
+          /// SizeAdapterConfig.init(context: context, designSize: safeDesignSize);
+          /// ```
+          ///
+          /// This initialization is crucial for achieving responsive layouts. It allows
+          /// the application to dynamically adjust widget sizes based on the relationship
+          /// between the original design and the actual device screen.
+          ///
+          /// **Note:** Initializing SizeAdapterConfig is typically done early in the widget
+          /// tree, ensuring that the layout maintains its intended proportions across
+          /// different devices and screen sizes.
 
-        SizeAdapterConfig.init(context: context, designSize: safeDesignSize);
-        return MediaQuery(
-          data: MediaQuery.of(context)
-              .copyWith(textScaleFactor: textScaleFactor ?? 1),
-          child: child,
-        );
+          SizeAdapterConfig.init(context: context, designSize: safeDesignSize);
+          return MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaleFactor: textScaleFactor ?? 1),
+            child: child,
+          );
+        });
       }),
     );
   }
