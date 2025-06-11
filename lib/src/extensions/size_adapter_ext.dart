@@ -24,7 +24,7 @@ extension SizeAdapterExt on num {
   /// Calculate padding proportionate to screen height
   ///
   /// Eg: 20.pv -> will take 20% padding of the screen
-  double get pv => paddingvertical(toDouble());
+  double get pv => paddingVertical(toDouble());
 
   /// Calculates the sp (Scalable Pixel) depending on the device's screen size
   ///

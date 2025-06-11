@@ -11,6 +11,7 @@ class SizeAdapterConfig {
   static late double appBarHeight;
   static late double designWidth;
   static late double designHeight;
+  static late TextScaler textScale;
   static Orientation? orientation;
 
   static void init({required BuildContext context, required Size designSize}) {
@@ -21,6 +22,7 @@ class SizeAdapterConfig {
     screenHeight = safeScreenHeight;
     designWidth = designSize.width;
     designHeight = designSize.height;
+    textScale = _mediaQueryData.textScaler;
     orientation = _mediaQueryData.orientation;
   }
 }
@@ -49,6 +51,8 @@ double calculateSafeScreenWidth(BuildContext context) {
   double safeAreaWidth =
       mediaQueryData.padding.left + mediaQueryData.padding.right;
   double safeScreenWidth = (screenWidth - safeAreaWidth);
+
+  ///!logger.i('Safe Screen Width: $safeScreenWidth');
   return safeScreenWidth;
 }
 
@@ -77,68 +81,105 @@ double calculateSafeScreenHeight(BuildContext context) {
   double safeAreaHeight =
       mediaQueryData.padding.top + mediaQueryData.padding.bottom;
   double safeScreenHeight = (screenHeight - safeAreaHeight);
+
+  ///!logger.i('Safe Screen Height: $safeScreenHeight');
   return safeScreenHeight;
 }
 
 // Get the proportionate height as per screen size
 /// --
 /// screenHeight is the height of the screen the app is run on
-/// desginHeight is the design screen height
+/// designHeight is the design screen height
 
 double height(double inputHeight) {
   double screenHeight = SizeAdapterConfig.screenHeight;
-  double desginHeight = SizeAdapterConfig.designHeight;
-  return (inputHeight / desginHeight) * screenHeight;
+  double designHeight = SizeAdapterConfig.designHeight;
+  final calculatedHeight = (inputHeight / designHeight) * screenHeight;
+  final height = (calculatedHeight <= 1)
+      ? (inputHeight <= 1 ? 1.0 : inputHeight)
+      : calculatedHeight;
+
+  ///!logger.i('Input Height: $inputHeight Calculated Height: $calculatedHeight Height: $height');
+  return height;
 }
 
 // Get the proportionate width as per screen size
 /// --
 /// screenWidth is the width of the screen the app is run on
-/// desginWidth is the design screen width
+/// designWidth is the design screen width
 
 double width(double inputWidth) {
   double screenWidth = SizeAdapterConfig.screenWidth;
-  double desginWidth = SizeAdapterConfig.designWidth;
-  return (inputWidth / desginWidth) * screenWidth;
+  double designWidth = SizeAdapterConfig.designWidth;
+  final calculatedWidth = (inputWidth / designWidth) * screenWidth;
+  final width = (calculatedWidth <= 1)
+      ? (inputWidth <= 1 ? 1.0 : inputWidth)
+      : calculatedWidth;
+
+  ///!logger.i('Input Width: $inputWidth Calculated Width: $calculatedWidth Width: $width');
+  return width;
 }
 
 // Calculate border radius proportionate to screen width
 /// --
 /// screenWidth is the width of the screen the app is run on
-/// desginWidth is the design screen width
+/// designWidth is the design screen width
 
 double radius(double inputRadius) {
   double screenWidth = SizeAdapterConfig.screenWidth;
-  double desginWidth = SizeAdapterConfig.designWidth;
-  return (inputRadius / desginWidth) * screenWidth;
+  double designWidth = SizeAdapterConfig.designWidth;
+  final calculatedRadius = (inputRadius / designWidth) * screenWidth;
+  final radius = (calculatedRadius <= 1)
+      ? (inputRadius <= 1 ? 1.0 : inputRadius)
+      : calculatedRadius;
+
+  ///!logger.i('Input Radius: $inputRadius Calculated Radius: $calculatedRadius Radius: $radius');
+  return radius;
 }
 
 // Calculate padding proportionate to screen width
 /// --
 /// screenWidth is the width of the screen the app is run on
-/// desginWidth is the design screen width
+/// designWidth is the design screen width
 
 double paddingHorizontal(double inputPadding) {
   double screenWidth = SizeAdapterConfig.screenWidth;
-  double desginWidth = SizeAdapterConfig.designWidth;
-  return (inputPadding / desginWidth) * screenWidth;
+  double designWidth = SizeAdapterConfig.designWidth;
+  final calculatedPadding = (inputPadding / designWidth) * screenWidth;
+  final padding = (calculatedPadding <= 1)
+      ? (inputPadding <= 1 ? 1.0 : inputPadding)
+      : calculatedPadding;
+
+  ///!logger.i('Input Padding: $inputPadding Calculated Padding: $calculatedPadding Padding Horizontal: $padding');
+  return padding;
 }
 // Calculate padding proportionate to screen height
 /// --
 /// screenHeight is the height of the screen the app is run on
-/// desginHeight is the design screen height
+/// designHeight is the design screen height
 
-double paddingvertical(double inputPadding) {
+double paddingVertical(double inputPadding) {
   double screenHeight = SizeAdapterConfig.screenHeight;
   double designHeight = SizeAdapterConfig.designHeight;
-  return (inputPadding / designHeight) * screenHeight;
+  final calculatedPadding = (inputPadding / designHeight) * screenHeight;
+  final padding = (calculatedPadding <= 1)
+      ? (inputPadding <= 1 ? 1.0 : inputPadding)
+      : calculatedPadding;
+
+  ///!logger.i('Input Padding: $inputPadding Calculated Padding: $calculatedPadding Padding Vertical: $padding');
+  return padding;
 }
 
 /// A method that returns the adaptive text size according to different screen sizes
 /// --
-/// desginHeight is the design screen height
+/// designHeight is the design screen height
 
 double adaptiveTextSize(double value) {
-  double desginHeight = SizeAdapterConfig.designHeight;
-  return (value / desginHeight) * SizeAdapterConfig.screenHeight;
+  double designHeight = SizeAdapterConfig.designHeight;
+  TextScaler textScaler = SizeAdapterConfig.textScale;
+  final textSize = (value / designHeight) * SizeAdapterConfig.screenHeight;
+  double scaledTextSize = textScaler.scale(textSize);
+
+  // logger.i('Input Text Size: $value Scaled Text Size: $scaledTextSize');
+  return scaledTextSize <= 1 ? value : scaledTextSize;
 }

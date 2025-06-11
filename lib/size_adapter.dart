@@ -1,4 +1,4 @@
-library size_adapter;
+library;
 
 export 'src/size_adapter.dart';
 export 'src/utils/size_adapter_config.dart';

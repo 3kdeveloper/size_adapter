@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Size Adapter',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primarySwatch: Colors.indigo),
+        theme: ThemeData(primarySwatch: Colors.indigo, useMaterial3: false),
         home: const HomeScreen(),
       ),
     );
